@@ -1,7 +1,7 @@
 [package]
 name = "snow-wasm"
 version = "0.1.0"
-authors = ["bran <bran@watcha.com>"]
+authors = ["hangwoo <marong61@gmail.com>"]
 edition = "2018"
 
 [lib]
