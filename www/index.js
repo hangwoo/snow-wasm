@@ -20,7 +20,7 @@ function update() {
   }
 }
 
-const mp = 25000;
+const mp = 250;
 const particles = [];
 const W = window.innerWidth;
 const H = window.innerHeight;
@@ -32,6 +32,7 @@ for (let i = 0; i < mp; i++) {
     d: Math.random() * mp,
   });
 }
+console.debug(particles);
 let angle = 0;
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
@@ -50,7 +51,7 @@ function draw() {
   const t0 = performance.now();
   update();
   const t1 = performance.now();
-  console.debug(t1 - t0);
+  // console.debug(t1 - t0);
   requestAnimationFrame(draw);
 }
 
