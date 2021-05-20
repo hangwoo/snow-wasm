@@ -1,3 +1,5 @@
+import { foo } from 'snow-wasm';
+
 function update() {
   angle += 0.01;
   for (let i = 0; i < mp; i++) {
@@ -32,7 +34,7 @@ for (let i = 0; i < mp; i++) {
     d: Math.random() * mp,
   });
 }
-console.debug(particles);
+
 let angle = 0;
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
@@ -57,4 +59,7 @@ function draw() {
 
 canvas.width = W;
 canvas.height = H;
-draw();
+// draw();
+
+console.debug('foo', foo(0));
+console.debug('foo', foo(1));
