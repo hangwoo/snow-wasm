@@ -31,10 +31,9 @@ struct SnowCanvas {
 
 #[wasm_bindgen]
 impl Particle {
-    pub fn update(&mut self, angle: f32, width: u32, height: u32) {
+    fn update(&mut self, angle: f32) {
         self.y += (angle + self.d).cos() - 0.5 + self.r / 1.5;
         self.x += angle.sin() * 1.5;
-        // TODO
     }
 }
 
@@ -68,7 +67,33 @@ impl SnowCanvas {
     pub fn update(&mut self) {
         self.angle += 0.01;
         for index in 0..self.count {
-            self.particles[index as usize].update(self.angle, self.width, self.height);
+            let p = &mut self.particles[index as usize];
+            p.update(self.angle);
+
+            if p.x > (self.width + 5) as f32 || p.x < -5.0 || p.y > self.height as f32 {
+                if index % 3 > 0 {
+                    self.particles[index as usize] = Particle {
+                        x: SnowCanvas::get_random() * self.width as f32,
+                        y: -10.0,
+                        r: p.r,
+                        d: p.d,
+                    };
+                } else if self.angle.sin() > 0.0 {
+                    self.particles[index as usize] = Particle {
+                        x: -5.0,
+                        y: SnowCanvas::get_random() * self.height as f32,
+                        r: p.r,
+                        d: p.d,
+                    };
+                } else {
+                    self.particles[index as usize] = Particle {
+                        x: 5.0 + self.width as f32,
+                        y: SnowCanvas::get_random() * self.height as f32,
+                        r: p.r,
+                        d: p.d,
+                    };
+                }
+            }
         }
     }
 
