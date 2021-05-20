@@ -11,6 +11,7 @@ use rand::Rng;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
+#[derive(Debug)]
 struct Particle {
     x: f32,
     y: f32,
@@ -19,6 +20,7 @@ struct Particle {
 }
 
 #[wasm_bindgen]
+#[derive(Debug)]
 struct SnowCanvas {
     width: u32,
     height: u32,
@@ -89,28 +91,39 @@ impl SnowCanvas {
 
 #[cfg(test)]
 mod test {
-    use crate::SnowCanvas;
+    use crate::{SnowCanvas, Particle};
+
+    #[test]
+    fn particle_update_test() {
+        let mut p = Particle {
+            x: 1.0,
+            y: 2.0,
+            d: 3.0,
+            r: 4.0,
+        };
+        let x1 = p.x;
+        let y1 = p.y;
+        p.update(0.3);
+        let x2 = p.x;
+        let y2 = p.y;
+
+        assert_ne!(x1, x2);
+        assert_ne!(y1, y2);
+    }
 
     #[test]
     fn particles_update_test() {
         let mut snow_canvas = SnowCanvas::new(
             10,
             10,
-            25,
+            1,
         );
         let x = snow_canvas.get_particle_x(0);
         let y = snow_canvas.get_particle_y(0);
-        let d = snow_canvas.get_particle_d(0);
-        let r = snow_canvas.get_particle_r(0);
         snow_canvas.update();
         let x2 = snow_canvas.get_particle_x(0);
         let y2 = snow_canvas.get_particle_y(0);
-        let d2 = snow_canvas.get_particle_d(0);
-        let r2 = snow_canvas.get_particle_r(0);
-
         assert_ne!(x, x2);
         assert_ne!(y, y2);
-        assert_ne!(d, d2);
-        assert_ne!(r, r2);
     }
 }
