@@ -10,8 +10,11 @@
     </style>
   </head>
   <body>
-  <canvas id="canvas"></canvas>
+  <canvas style="position: absolute; left: 0; top: 0;" id="canvas1"></canvas>
+  <canvas style="position: absolute; right: 0; top: 0;" id="canvas2"></canvas>
     <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
     <script src="./bootstrap.js"></script>
+  <div style="height: 10px; background: blue; width: 0; position: absolute; z-index: 100; top: 50%;" id="performance1"></div>
+  <div style="height: 10px; background: blue; width: 0; position: absolute; z-index: 100; top: 60%;" id="performance2"></div>
   </body>
 </html>
