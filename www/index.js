@@ -96,7 +96,7 @@ function performanceChecker(cb, pfDom) {
   const t1 = performance.now();
   const pf = t1 - t0;
   pfDom.textContent = pf.toString();
-  pfDom.style.width = `${pf * 2000}px`;
+  pfDom.style.width = `${pf * 500}px`;
 }
 
 
